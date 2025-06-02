@@ -1,9 +1,11 @@
+import AppRoutes from "./app/routes";
+import FullPageLoading from "./shared/pages/full-page-loading";
+
 const App = () => {
   return (
     <>
-      <div>
-        <h1 className="text-center">Welcome to Personal Admin</h1>
-      </div>
+      <AppRoutes />
+      <FullPageLoading />
     </>
   );
 };
