@@ -7,7 +7,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import App from "./App.tsx";
-import { persistor, store } from "@/app/redux/store";
+import { persistor, store } from "./app/redux/store";
 import "@/styles/global.scss";
 
 createRoot(document.getElementById("root")!).render(
