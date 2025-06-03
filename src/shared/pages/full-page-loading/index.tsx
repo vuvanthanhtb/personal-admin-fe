@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useAppSelector } from "@/app/redux";
-import type { RootState } from "@/app/redux";
+import { useSelector } from "react-redux";
+import type { RootState } from "app/redux/store";
 import styles from "./_loading.module.scss";
 
 interface FullPageLoadingProps {
@@ -16,10 +16,7 @@ const FullPageLoading: React.FC<FullPageLoadingProps> = (props) => {
     target,
   } = props;
 
-  const { totalLoadingProcess } = useAppSelector(
-    (state: RootState) => state.app
-  );
-  console.log("FullPageLoading state:", totalLoadingProcess);
+  const { totalLoadingProcess } = useSelector((state: RootState) => state.app);
   if (totalLoadingProcess === 0) {
     // This is no on-going loading, disable loading indicator
     return "";

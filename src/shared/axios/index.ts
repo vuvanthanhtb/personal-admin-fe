@@ -24,9 +24,11 @@ class RequestService {
         model,
         data
       );
+      
       if (!this.#service) {
         throw new Error("ApiProxyService is not initialized.");
       }
+
       const response = await this.#service.methodRequest(
         endpoint,
         body,
@@ -35,7 +37,7 @@ class RequestService {
       );
       return response.data;
     } catch (error) {
-      return error;
+      return null;
     }
   }
 }
