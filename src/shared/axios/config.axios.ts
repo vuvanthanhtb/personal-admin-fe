@@ -1,5 +1,4 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
-import { GET, POST } from "../constants";
 
 class ApiProxyService {
   #axios_instance: AxiosInstance | null = null;
@@ -19,6 +18,7 @@ class ApiProxyService {
   methodRequest = (
     endpoint: string,
     data: Object | null,
+    params: Object | null,
     method: string,
     headers?: Record<string, string>
   ) => {
@@ -30,12 +30,18 @@ class ApiProxyService {
       },
     };
 
-    if (method === GET) {
-      if (data && typeof data === "object") {
-        const queryString = new URLSearchParams(data as Record<string, any>).toString();
-        apiUrl = `${endpoint}?${queryString}`;
-      }
-    } else if (method === POST) {
+    if (params && typeof params === "object") {
+      const queryString = new URLSearchParams(
+        params as Record<string, any>
+      ).toString();
+      apiUrl = `${endpoint}?${queryString}`;
+    }
+
+    if (headers && typeof headers === "object") {
+      config.headers = { ...config.headers, ...headers };
+    }
+
+    if (data && typeof data === "object") {
       config["data"] = data;
     }
 

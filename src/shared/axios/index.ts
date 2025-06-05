@@ -11,8 +11,9 @@ class RequestService {
 
   async methodRequest(
     endpoint: string,
-    data: any,
-    model: any,
+    data: any = null,
+    model: any = null,
+    params: any = null,
     method: string = GET,
     headers: Record<string, any> = {}
   ) {
@@ -24,7 +25,12 @@ class RequestService {
         model,
         data
       );
-      
+
+      const queryParams: Record<string, any> | null = mappingRequestMapper(
+        model,
+        params
+      );
+
       if (!this.#service) {
         throw new Error("ApiProxyService is not initialized.");
       }
@@ -32,6 +38,7 @@ class RequestService {
       const response = await this.#service.methodRequest(
         endpoint,
         body,
+        queryParams,
         method,
         headers
       );
