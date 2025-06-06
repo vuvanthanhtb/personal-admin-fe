@@ -38,6 +38,8 @@ class RequestService {
         headers
       );
     } catch (error) {
+    debugger
+
       this.handleError(error);
       return null;
     }

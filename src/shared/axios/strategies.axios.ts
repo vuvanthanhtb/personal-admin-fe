@@ -39,7 +39,7 @@ export class AxiosStrategy implements IRequestStrategy {
     this.axiosInstance = axios.create({
       baseURL: import.meta.env.VITE_API_URL,
       timeout: 10 * 60 * 1000,
-      withCredentials: true,
+      withCredentials: false,
       headers: {
         "Content-Type": "application/json",
       },

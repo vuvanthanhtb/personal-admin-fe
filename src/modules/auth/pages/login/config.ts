@@ -5,7 +5,7 @@ export const loginConfig: IConfig = {
   fields: [
     {
       type: TEXT,
-      name: "account",
+      name: "username",
       label: "Tài khoản",
       required: true,
       size: 12,
@@ -43,6 +43,6 @@ export const loginConfig: IConfig = {
 };
 
 export const initialValues = {
-  account: "",
+  username: "",
   password: "",
 };

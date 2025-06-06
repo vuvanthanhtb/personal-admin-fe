@@ -1,6 +1,6 @@
 const endpoint = {
   loginUser: "/auth/login",
-  currentUser: "/auth/current-user",
+  currentUser: "/auth/me",
 }
 
 export default endpoint;

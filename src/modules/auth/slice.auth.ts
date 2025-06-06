@@ -7,6 +7,7 @@ export const loginUser = createAsyncThunk(
   async (payload: LoginRequest, thunkAPI) => {
     const data = await AuthService.loginUser(payload);
     if (data) {
+      localStorage.setItem("TOKEN_CURRENT", data.accessToken);
       thunkAPI.dispatch(getCurrentUser());
       return true;
     }
@@ -18,6 +19,7 @@ export const getCurrentUser = createAsyncThunk(
   "auth/getCurrentUser",
   async () => {
     const data = await AuthService.getCurrentUser();
+
     return data;
   }
 );
