@@ -43,6 +43,6 @@ export const loginConfig: IConfig = {
 };
 
 export const initialValues = {
-  username: "",
-  password: "",
+  username: "emilys",
+  password: "emilyspass",
 };
