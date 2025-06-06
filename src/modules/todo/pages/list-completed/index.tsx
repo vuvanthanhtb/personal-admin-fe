@@ -1,8 +1,11 @@
+import { DataTable } from "shared/components";
+import { tableConfig, dataMock } from "./config";
+import styles from "./_completed.module.scss";
+
 const ListTodosCompletedPage = () => {
   return (
-    <div>
-      <h1>Complete Todos</h1>
-      <p>This is where the list of complete todos will be displayed.</p>
+    <div className={styles["completed-container"]}>
+      <DataTable tableConfig={tableConfig} data={dataMock} />
     </div>
   );
 };

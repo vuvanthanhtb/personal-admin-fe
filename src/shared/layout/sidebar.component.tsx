@@ -1,17 +1,15 @@
+interface SidebarComponentProps {
+  styles: { [key: string]: string };
+}
 
-const SidebarComponent = () => {
+const SidebarComponent: React.FC<SidebarComponentProps> = (props) => {
+  const { styles } = props;
+
   return (
-    <div className="sidebar">
-      <nav>
-        <ul>
-          <li><a href="/dashboard">Dashboard</a></li>
-          <li><a href="/settings">Settings</a></li>
-          <li><a href="/profile">Profile</a></li>
-          <li><a href="/logout">Logout</a></li>
-        </ul>
-      </nav>
+    <div className={styles["sidebar"]}>
+      <div className={styles["sidebar__title"]}>Personal Admin</div>
     </div>
   );
-}
+};
 
 export default SidebarComponent;

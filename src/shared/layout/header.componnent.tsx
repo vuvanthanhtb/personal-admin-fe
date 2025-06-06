@@ -1,15 +1,18 @@
 
 type IProps = {
   title: string;
+  styles: Record<string, string>;
 };
 const HeaderComponent = (props: IProps) => {
-  const { title } = props;
+  const { title, styles } = props;
 
   return (
-    <div className="header">
-      <div className="header__title">{title}</div>
-      <div className="header__actions">
-        {/* Add any header actions here, e.g., user profile, notifications */}
+    <div className={styles["header"]}>
+      <div className={styles["header__title"]}>{title}</div>
+      <div className={styles["header__actions"]}>
+        <div>
+          <label>Xin chào, <span>Thanh</span></label>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { TEXT, PASSWORD, BUTTON } from "shared/constants";
+import type { IConfig } from "shared/components";
 
-export const loginConfig = {
+export const loginConfig: IConfig = {
   fields: [
     {
       type: TEXT,

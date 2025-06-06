@@ -19,22 +19,22 @@ type IField = {
   disabled?: boolean;
   size: number;
   required?: boolean;
-  childs: IButton[];
+  childs?: IButton[];
 };
 
-type IConfig = {
+export type IConfig = {
   fields: IField[];
 };
 
 interface FormComponentProps {
-  config: IConfig;
+  formConfig: IConfig;
   onSubmit: (data: any) => void;
   onChange: (data: Record<string, any>) => void;
   values?: Record<string, any>;
 }
 
-const FormComponent: React.FC<FormComponentProps> = (props) => {
-  const { config, values, onSubmit, onChange } = props;
+export const FormComponent: React.FC<FormComponentProps> = (props) => {
+  const { formConfig, values, onSubmit, onChange } = props;
 
   const {
     register,
@@ -58,7 +58,7 @@ const FormComponent: React.FC<FormComponentProps> = (props) => {
     <div className={styles["form-container"]}>
       <Form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Row>
-          {config.fields.map((field: any, index: number) => {
+          {formConfig.fields.map((field: any, index: number) => {
             if ([TEXT, PASSWORD].includes(field.type)) {
               return (
                 <Col
@@ -126,5 +126,3 @@ const FormComponent: React.FC<FormComponentProps> = (props) => {
     </div>
   );
 };
-
-export default FormComponent;

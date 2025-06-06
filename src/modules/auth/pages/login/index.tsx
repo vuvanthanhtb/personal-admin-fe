@@ -1,12 +1,14 @@
-import { FC, useState, useEffect } from "react";
+import { type FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FormComponent } from "shared/components";
 import type { RootState, AppDispatch } from "app/redux/store";
+import Avatar from "shared/assets/auth/avatar.jpg";
+import Background from "shared/assets/auth/backgound-login.jpg";
 import { loginConfig, initialValues } from "./config";
-import styles from "./_login.module.scss";
 import type { LoginRequest } from "../../model.auth";
 import { loginUser } from "../../slice.auth";
+import styles from "./_login.module.scss";
 
 const Login: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,14 +36,14 @@ const Login: FC = () => {
 
   return (
     <div className={styles["login-container"]}>
-      <img
-        src="https://photo.znews.vn/w660/Uploaded/vpibtwvo/2024_03_25/cuc_tinh_y6.jpg"
-        alt="login"
-      />
+      <img src={Background} alt="login" />
       <div className={styles["form-login"]}>
-        <h1>Login Personal Admin</h1>
+        <img className={styles["form-login__image"]} src={Avatar} alt="login" />
+        <label className={styles["form-login__title"]}>
+          Login Personal Admin
+        </label>
         <FormComponent
-          config={loginConfig}
+          formConfig={loginConfig}
           values={formValues}
           onChange={onChange}
           onSubmit={handleSubmit}
