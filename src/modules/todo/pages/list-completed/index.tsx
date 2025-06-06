@@ -1,4 +1,4 @@
-import { DataTable } from "shared/components";
+import { DataTable } from "shared";
 import { tableConfig, dataMock } from "./config";
 import styles from "./_completed.module.scss";
 

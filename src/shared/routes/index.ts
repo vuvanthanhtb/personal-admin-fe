@@ -2,6 +2,7 @@ import { lazy } from "react";
 import todoRoutes from "./todo.route";
 import authRoutes from "./auth.route";
 import type { IRouteModel } from "../model/route.model";
+import homeRoutes from "./home.route";
 
 const routes: IRouteModel[] = [
   {
@@ -11,6 +12,7 @@ const routes: IRouteModel[] = [
     private: false,
     component: lazy(() => import("shared/pages/not-found")),
   },
+  ...homeRoutes,
   ...todoRoutes,
   ...authRoutes,
 ];

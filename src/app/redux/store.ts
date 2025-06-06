@@ -13,7 +13,7 @@ import storage from "redux-persist/lib/storage";
 
 import { loadingMiddleware } from "./middleware";
 import loadingReducer from "./loading.slice";
-import authReducer from "modules/auth/slice.auth";
+import authReducer from "modules/auth/business/slice.auth";
 
 const rootReducer = combineReducers({
   app: loadingReducer,

@@ -1,27 +1,25 @@
 import { type FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FormComponent } from "shared/components";
+import { Avatar, BackgroundLogin, FormComponent } from "shared";
 import type { RootState, AppDispatch } from "app/redux/store";
-import Avatar from "shared/assets/auth/avatar.jpg";
-import Background from "shared/assets/auth/backgound-login.jpg";
 import { loginConfig, initialValues } from "./config";
-import type { LoginRequest } from "../../model.auth";
-import { loginUser } from "../../slice.auth";
+import type { LoginRequest } from "../../business";
+import { loginUser } from "../../business";
 import styles from "./_login.module.scss";
 
 const Login: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { currentUser } = useSelector((state: RootState) => state.auth);
+  const { isLogin } = useSelector((state: RootState) => state.auth);
   const [formValues, setFormValues] = useState<LoginRequest>(initialValues);
 
   useEffect(() => {
     document.title = "Đăng nhập";
-    if (currentUser) {
+    if (isLogin) {
       navigate("/", { replace: true });
     }
-  }, [currentUser, navigate]);
+  }, [isLogin, navigate]);
 
   const onChange = (data: Record<string, any>) => {
     setFormValues((prevValues) => ({
@@ -36,7 +34,7 @@ const Login: FC = () => {
 
   return (
     <div className={styles["login-container"]}>
-      <img src={Background} alt="login" />
+      <img src={BackgroundLogin} alt="login" />
       <div className={styles["form-login"]}>
         <img className={styles["form-login__image"]} src={Avatar} alt="login" />
         <label className={styles["form-login__title"]}>

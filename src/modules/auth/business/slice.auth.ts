@@ -1,14 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { REFRESH_TOKEN, TOKEN_CURRENT } from "shared/constants";
 import AuthService from "./service.auth";
 import type { LoginRequest } from "./model.auth";
+import { setSession } from "shared";
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
-  async (payload: LoginRequest, thunkAPI) => {
+  async (payload: LoginRequest) => {
     const data = await AuthService.loginUser(payload);
     if (data) {
-      localStorage.setItem("TOKEN_CURRENT", data.accessToken);
-      thunkAPI.dispatch(getCurrentUser());
+      setSession(TOKEN_CURRENT, data.accessToken);
+      setSession(REFRESH_TOKEN, data.refreshToken);
       return true;
     }
     return false;
@@ -37,7 +39,7 @@ const auth = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.isLogin = action.payload;
     });
-     builder.addCase(getCurrentUser.fulfilled, (state, action) => {
+    builder.addCase(getCurrentUser.fulfilled, (state, action) => {
       state.currentUser = action.payload;
     });
   },

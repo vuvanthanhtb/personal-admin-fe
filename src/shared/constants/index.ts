@@ -4,6 +4,9 @@ export const PUT = "put";
 export const DELETE = "delete";
 export const PATCH = "patch";
 
+export const TOKEN_CURRENT = "token_current";
+export const REFRESH_TOKEN = "refresh_token";
+
 export const STRING = "stting";
 export const NUMBER = "number";
 export const TEXT = "text";
@@ -23,3 +26,5 @@ export const HIDDEN = "hidden";
 export const COLOR = "color";
 export const URL = "url";
 export const BUTTON = "button";
+
+export const ROOT = "root";

@@ -1,0 +1,26 @@
+.menu-container {
+  img {
+    padding-right: 5px;
+  }
+  .menu-parent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+    color: #ffffff;
+    padding-right: 20px;
+    margin-bottom: 10px;
+  }
+
+  .menu-child {
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+
+    div {
+      margin: 10px 0;
+      cursor: pointer;
+      color: #ffffff;
+    }
+  }
+}

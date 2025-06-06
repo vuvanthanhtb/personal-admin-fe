@@ -3,9 +3,17 @@ import axios, {
   type AxiosInstance,
   type AxiosRequestConfig,
   type AxiosResponse,
+  type InternalAxiosRequestConfig,
   type Method,
 } from "axios";
 import { saveAs } from "file-saver";
+import {
+  getSession,
+  REFRESH_TOKEN,
+  removeSession,
+  setSession,
+  TOKEN_CURRENT,
+} from "..";
 
 export interface IRequestStrategy {
   request<T = any>(
@@ -34,6 +42,8 @@ export interface IRequestStrategy {
 
 export class AxiosStrategy implements IRequestStrategy {
   private axiosInstance: AxiosInstance;
+  private isRefreshing = false;
+  private failedQueue: any[] = [];
 
   constructor() {
     this.axiosInstance = axios.create({
@@ -45,12 +55,67 @@ export class AxiosStrategy implements IRequestStrategy {
       },
     });
 
+    this.axiosInstance.interceptors.request.use(
+      (config: AxiosRequestConfig | any) => {
+        const token =  getSession<string>(TOKEN_CURRENT);
+        
+        if (token) {
+          config.headers = {
+            ...config.headers,
+            Authorization: `Bearer ${token}`,
+          };
+        }
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
     this.axiosInstance.interceptors.response.use(
-      (res) => res,
-      (error: AxiosError) => {
-        const status = error.response?.status;
-        if (status === 401 || status === 403) {
+      (response) => response,
+      async (error: AxiosError) => {
+        const originalRequest: InternalAxiosRequestConfig | any = error.config;
+        if (error.response?.status === 403) {
+          removeSession(TOKEN_CURRENT);
+          removeSession(REFRESH_TOKEN);
           window.location.href = "/login";
+        }
+
+        if (error.response?.status === 401 && !originalRequest?._retry) {
+          if (this.isRefreshing) {
+            return new Promise((resolve) => {
+              this.failedQueue.push((token: string) => {
+                originalRequest.headers["Authorization"] = "Bearer " + token;
+                resolve(this.axiosInstance(originalRequest));
+              });
+            });
+          }
+
+          originalRequest._retry = true;
+          this.isRefreshing = true;
+
+          try {
+            const refreshToken = localStorage.getItem(REFRESH_TOKEN);
+            const response = await axios.post(
+              `${import.meta.env.VITE_API_URL}/auth/refresh`,
+              { refreshToken }
+            );
+            const { accessToken, refreshToken: newRefreshToken } =
+              response.data;
+
+            setSession(TOKEN_CURRENT, accessToken);
+            setSession(REFRESH_TOKEN, newRefreshToken);
+
+            this.failedQueue.forEach((cb) => cb(accessToken));
+            this.failedQueue = [];
+
+            return this.axiosInstance(originalRequest);
+          } catch (err) {
+            removeSession(TOKEN_CURRENT);
+            removeSession(REFRESH_TOKEN);
+            window.location.href = "/login";
+            return Promise.reject(err);
+          } finally {
+            this.isRefreshing = false;
+          }
         }
         return Promise.reject(error);
       }

@@ -1,6 +1,6 @@
 
 type IProps = {
-  title: string;
+  title?: string;
   styles: Record<string, string>;
 };
 const HeaderComponent = (props: IProps) => {

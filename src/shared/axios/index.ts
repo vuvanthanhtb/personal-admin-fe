@@ -1,7 +1,7 @@
 import { AxiosStrategy, type IRequestStrategy } from "./strategies.axios";
 import type { Method } from "axios";
-import { toastError } from "../utils";
 import { GET, POST } from "../constants";
+import { toastError } from "..";
 
 class RequestService {
   private static instance: RequestService;
@@ -18,8 +18,23 @@ class RequestService {
     return RequestService.instance;
   }
 
-  private handleError(error: unknown): void {
+  private handleError(error: unknown) {
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "response" in error &&
+      typeof (error as any).response === "object" &&
+      (error as any).response !== null &&
+      "data" in (error as any).response &&
+      typeof (error as any).response.data === "object" &&
+      (error as any).response.data !== null &&
+      "message" in (error as any).response.data
+    ) {
+      toastError((error as any).response.data.message);
+      return null;
+    }
     toastError(error instanceof Error ? error.message : String(error));
+    return null;
   }
 
   async methodRequest<T = any>(
@@ -38,10 +53,7 @@ class RequestService {
         headers
       );
     } catch (error) {
-    debugger
-
       this.handleError(error);
-      return null;
     }
   }
 

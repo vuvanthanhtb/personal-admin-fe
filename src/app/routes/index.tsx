@@ -1,9 +1,7 @@
 import { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { BrowserRouter, Outlet } from "react-router-dom";
-import FullPageLoading from "shared/pages/full-page-loading";
-import routes from "shared/routes";
-import PrivateLayout from "shared/layout/private.layout";
+import { PrivateLayout, FullPageLoading, routes } from "shared";
 import type { IRouteModel } from "shared/model/route.model";
 
 const AppRoutes = () => {

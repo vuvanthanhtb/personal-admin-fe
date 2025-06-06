@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import type { IRouteModel } from "../model/route.model";
+import { ROOT } from "..";
 
 const todoRoutes: IRouteModel[] = [
   {
@@ -8,8 +9,7 @@ const todoRoutes: IRouteModel[] = [
     path: "/todo/pending",
     private: true,
     component: lazy(() => import("modules/todo/pages/list-pending")),
-    roles: [],
-    child: [],
+    roles: [ROOT],
   },
   {
     name: "ListTodosCompletedPage",
@@ -17,8 +17,7 @@ const todoRoutes: IRouteModel[] = [
     path: "/todo/completed",
     private: true,
     component: lazy(() => import("modules/todo/pages/list-completed")),
-    roles: [],
-    child: [],
+    roles: [ROOT],
   },
 ];
 
