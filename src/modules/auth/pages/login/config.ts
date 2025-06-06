@@ -5,21 +5,21 @@ export const loginConfig: IConfig = {
   fields: [
     {
       type: TEXT,
-      name: "email",
-      label: "Email",
+      name: "account",
+      label: "Tài khoản",
       required: true,
       size: 12,
       validation: {
         required: {
           value: true,
-          message: "Vui lòng nhập email",
+          message: "Vui lòng nhập tài khoản",
         },
       },
     },
     {
       type: PASSWORD,
       name: "password",
-      label: "Password",
+      label: "Mật khẩu",
       required: true,
       size: 12,
       validation: {
@@ -43,6 +43,6 @@ export const loginConfig: IConfig = {
 };
 
 export const initialValues = {
-  email: "",
+  account: "",
   password: "",
 };
