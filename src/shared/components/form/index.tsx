@@ -1,0 +1,111 @@
+import { useForm } from "react-hook-form";
+import { Button, Form, Row, Col } from "react-bootstrap";
+import { TEXT, PASSWORD, BUTTON } from "shared/constants";
+import styles from "./_form.module.scss";
+
+type IButton = {
+  type: "button" | "submit" | "reset";
+  label: string;
+  disabled?: boolean;
+};
+
+type IField = {
+  name?: string;
+  label?: string;
+  type: string;
+  validation?: {};
+  placeholder?: string;
+  disabled?: boolean;
+  size: number;
+  required?: boolean;
+  childs: IButton[];
+};
+
+type IConfig = {
+  fields: IField[];
+};
+
+interface FormComponentProps {
+  config: IConfig;
+  onSubmit: (data: any) => void;
+}
+
+const FormComponent: React.FC<FormComponentProps> = (props) => {
+  const { config, onSubmit } = props;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  console.log(errors);
+
+  return (
+    <div className={styles["form-container"]}>
+      <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Row>
+          {config.fields.map((field: any, index: number) => {
+            console.log(field.type);
+            if ([TEXT, PASSWORD].includes(field.type)) {
+              return (
+                <Col
+                  key={`form-${index + 9999}`}
+                  md={field.size}
+                  xs={12}
+                  className="mb-3"
+                >
+                  <Form.Group controlId={field.name}>
+                    <Form.Label>
+                      {field.label}
+                      {field?.required && (
+                        <span className={styles["form-required"]}>*</span>
+                      )}
+                    </Form.Label>
+                    <Form.Control
+                      className="shadow-none"
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      disabled={field.disabled}
+                      isInvalid={!!errors[field.name]}
+                      {...register(field.name, field.validation)}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors[field.name]?.message as string}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+              );
+            }
+
+            if (field.type === BUTTON) {
+              return (
+                <Col
+                  key={`form-${index + 9999}`}
+                  md={field.size}
+                  xs={12}
+                  className="mb-3"
+                >
+                  {field.childs.map((child: IButton, childIndex: number) => (
+                    <Button
+                      key={`form-button-${index}-${childIndex}`}
+                      type={child.type}
+                      disabled={child.disabled}
+                      className="me-2"
+                    >
+                      {child.label}
+                    </Button>
+                  ))}
+                </Col>
+              );
+            }
+
+            return null;
+          })}
+        </Row>
+      </Form>
+    </div>
+  );
+};
+
+export default FormComponent;

@@ -1,0 +1,20 @@
+.login-container {
+  display: flex;
+  flex-direction: row;
+
+  img {
+    width: calc(100vw - 30%);
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  .form-login {
+    width: 30%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 30px;
+  }
+}

@@ -7,7 +7,7 @@ const authRoutes: IRouteModel[] = [
     title: "Đăng nhập",
     path: "/login",
     private: false,
-    component: lazy(() => import("@modules/auth/pages/login")),
+    component: lazy(() => import("modules/auth/pages/login")),
   },
 ];
 

@@ -1,61 +1,18 @@
-import React, { useState } from "react";
+import { FC } from "react";
+import { FormComponent } from "shared/components";
+import { loginConfig } from "./config";
+import styles from "./_login.module.scss";
 
-const Login: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    // Dummy validation
-    if (!email || !password) {
-      setError("Please enter both email and password.");
-      return;
-    }
-    // TODO: Implement actual login logic here
-    alert(`Logging in with\nEmail: ${email}\nPassword: ${password}`);
-  };
+const Login: FC = () => {
+  const handleSubmit = (e: React.FormEvent) => {};
 
   return (
-    <div
-      style={{
-        maxWidth: 400,
-        margin: "40px auto",
-        padding: 24,
-        border: "1px solid #eee",
-        borderRadius: 8,
-      }}
-    >
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 16 }}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "100%", padding: 8, marginTop: 4 }}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: 16 }}>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "100%", padding: 8, marginTop: 4 }}
-            required
-          />
-        </div>
-        {error && <div style={{ color: "red", marginBottom: 16 }}>{error}</div>}
-        <button type="submit" style={{ width: "100%", padding: 10 }}>
-          Login
-        </button>
-      </form>
+    <div className={styles["login-container"]}>
+      <img src="https://photo.znews.vn/w660/Uploaded/vpibtwvo/2024_03_25/cuc_tinh_y6.jpg" alt="login" />
+      <div className={styles["form-login"]}>
+        <h1>Login Personal Admin</h1>
+        <FormComponent config={loginConfig} onSubmit={handleSubmit} />
+      </div>
     </div>
   );
 };
