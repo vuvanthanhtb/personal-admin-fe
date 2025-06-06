@@ -11,11 +11,13 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import loadingReducer from "./loading.slice";
 import { loadingMiddleware } from "./middleware";
+import loadingReducer from "./loading.slice";
+import authReducer from "modules/auth/slice.auth";
 
 const rootReducer = combineReducers({
   app: loadingReducer,
+  auth: authReducer,
 });
 
 const persistConfig = {

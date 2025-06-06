@@ -40,3 +40,8 @@ export const loginConfig = {
     },
   ],
 };
+
+export const initialValues = {
+  email: "",
+  password: "",
+};

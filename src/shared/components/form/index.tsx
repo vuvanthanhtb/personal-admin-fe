@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { TEXT, PASSWORD, BUTTON } from "shared/constants";
@@ -28,25 +29,36 @@ type IConfig = {
 interface FormComponentProps {
   config: IConfig;
   onSubmit: (data: any) => void;
+  onChange: (data: Record<string, any>) => void;
+  values?: Record<string, any>;
 }
 
 const FormComponent: React.FC<FormComponentProps> = (props) => {
-  const { config, onSubmit } = props;
+  const { config, values, onSubmit, onChange } = props;
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    reValidateMode: "onBlur",
+    defaultValues: values || {},
+  });
 
-  console.log(errors);
+  useEffect(() => {
+    if (values) {
+      Object.entries(values).forEach(([key, value]) => {
+        setValue(key, value);
+      });
+    }
+  }, [values, setValue]);
 
   return (
     <div className={styles["form-container"]}>
       <Form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Row>
           {config.fields.map((field: any, index: number) => {
-            console.log(field.type);
             if ([TEXT, PASSWORD].includes(field.type)) {
               return (
                 <Col
@@ -68,7 +80,14 @@ const FormComponent: React.FC<FormComponentProps> = (props) => {
                       placeholder={field.placeholder}
                       disabled={field.disabled}
                       isInvalid={!!errors[field.name]}
-                      {...register(field.name, field.validation)}
+                      {...register(field.name, {
+                        ...field.validation,
+                        onChange: (e) => {
+                          const value = e.target.value;
+                          setValue(field.name, value);
+                          onChange({ [field.name]: value });
+                        },
+                      })}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors[field.name]?.message as string}

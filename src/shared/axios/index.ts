@@ -1,52 +1,81 @@
-import { GET } from "../constants";
-import { mappingRequestMapper } from "../mapper";
-import ApiProxyService from "./config.axios";
+import { AxiosStrategy, type IRequestStrategy } from "./strategies.axios";
+import type { Method } from "axios";
+import { toastError } from "../utils";
+import { GET, POST } from "../constants";
 
 class RequestService {
-  #service: ApiProxyService | null = null;
+  private static instance: RequestService;
+  private strategy: IRequestStrategy;
 
-  constructor() {
-    this.#service = new ApiProxyService();
+  private constructor(strategy: IRequestStrategy) {
+    this.strategy = strategy;
   }
 
-  async methodRequest(
+  public static getInstance(): RequestService {
+    if (!RequestService.instance) {
+      RequestService.instance = new RequestService(new AxiosStrategy());
+    }
+    return RequestService.instance;
+  }
+
+  private handleError(error: unknown): void {
+    toastError(error instanceof Error ? error.message : String(error));
+  }
+
+  async methodRequest<T = any>(
     endpoint: string,
-    data: any = null,
-    model: any = null,
-    params: any = null,
-    method: string = GET,
-    headers: Record<string, any> = {}
+    method: Method = GET,
+    body: any = null,
+    params: Record<string, any> = {},
+    headers: Record<string, string> = {}
   ) {
     try {
-      if (typeof mappingRequestMapper !== "function") {
-        throw new Error("mappingRequestMapper is not a function.");
-      }
-      const body: Record<string, any> | null = mappingRequestMapper(
-        model,
-        data
-      );
-
-      const queryParams: Record<string, any> | null = mappingRequestMapper(
-        model,
-        params
-      );
-
-      if (!this.#service) {
-        throw new Error("ApiProxyService is not initialized.");
-      }
-
-      const response = await this.#service.methodRequest(
+      return await this.strategy.request<T>(
         endpoint,
+        method,
         body,
-        queryParams,
+        params,
+        headers
+      );
+    } catch (error) {
+      this.handleError(error);
+      return null;
+    }
+  }
+
+  async download(
+    endpoint: string,
+    params: Record<string, any> = {},
+    method: Method = GET,
+    headers: Record<string, string> = {}
+  ): Promise<void> {
+    try {
+      await this.strategy.downloadFile(endpoint, params, method, headers);
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  async upload<T = any>(
+    endpoint: string,
+    files: File | File[] | Record<string, File | File[]>,
+    extraData: Record<string, any> = {},
+    method: Method = POST,
+    headers: Record<string, string> = {}
+  ): Promise<T | null> {
+    try {
+      return await this.strategy.uploadFile<T>(
+        endpoint,
+        files,
+        extraData,
         method,
         headers
       );
-      return response.data;
     } catch (error) {
+      this.handleError(error);
       return null;
     }
   }
 }
 
-export default RequestService;
+export default RequestService.getInstance();
