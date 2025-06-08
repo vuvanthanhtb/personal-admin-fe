@@ -21,8 +21,7 @@ export interface IRequestStrategy {
     method: Method,
     data?: any,
     params?: Record<string, any>,
-    headers?: Record<string, string>,
-    isWebhook?: boolean
+    headers?: Record<string, string>
   ): Promise<T>;
 
   downloadFile(
@@ -128,8 +127,7 @@ export class AxiosStrategy implements IRequestStrategy {
     method: Method,
     data?: any,
     params?: Record<string, any>,
-    headers: Record<string, string> = {},
-    isWebhook: boolean = false
+    headers: Record<string, string> = {}
   ): Promise<T> {
     const config: AxiosRequestConfig = {
       url: endpoint,
@@ -137,12 +135,7 @@ export class AxiosStrategy implements IRequestStrategy {
       data,
       params,
       headers,
-      baseURL: isWebhook
-        ? import.meta.env.VITE_N8N_WEBHOOK_URL
-        : import.meta.env.VITE_API_URL,
     };
-
-    (config as any).isWebhook = isWebhook;
 
     const response = await this.axiosInstance.request<T>(config);
     return response.data;
