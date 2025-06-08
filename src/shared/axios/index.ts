@@ -42,7 +42,8 @@ class RequestService {
     method: Method = GET,
     body: any = null,
     params: Record<string, any> = {},
-    headers: Record<string, string> = {}
+    headers: Record<string, string> = {},
+    isWebhook: boolean = false
   ) {
     try {
       return await this.strategy.request<T>(
@@ -50,7 +51,8 @@ class RequestService {
         method,
         body,
         params,
-        headers
+        headers,
+        isWebhook
       );
     } catch (error) {
       this.handleError(error);

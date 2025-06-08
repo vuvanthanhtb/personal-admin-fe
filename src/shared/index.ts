@@ -13,3 +13,4 @@ export { default as ListCheckIcon } from "./assets/list-checks.svg";
 export { default as ChevronDownIcon } from "./assets/chevron-down.svg";
 export { default as ChevronUpIcon } from "./assets/chevron-up.svg";
 export { default as CheckCheckIcon } from "./assets/check-check.svg";
+export *from "./viLocalizer";
