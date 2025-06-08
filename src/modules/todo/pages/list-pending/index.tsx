@@ -3,6 +3,7 @@ import { Calendar, Views } from "react-big-calendar";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { viLocalizer, viMessages } from "shared";
 import moment from "moment";
+import styles from "./_pending.module.scss";
 
 const DnDCalendar = withDragAndDrop(Calendar);
 
@@ -44,7 +45,7 @@ const ListTodosPendingPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles["pending-container"]}>
       <DnDCalendar
         defaultDate={moment().toDate()}
         defaultView={Views.MONTH}
@@ -55,7 +56,7 @@ const ListTodosPendingPage = () => {
         onEventDrop={onEventDrop}
         onEventResize={onEventResize}
         resizable
-        style={{ height: "100vh" }}
+        style={{ height: "90vh" }}
         messages={viMessages}
         selectable
         onSelectSlot={handleSelectSlot}
