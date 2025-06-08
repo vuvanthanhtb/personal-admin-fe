@@ -7,24 +7,24 @@ import moment from "moment";
 const DnDCalendar = withDragAndDrop(Calendar);
 
 const ListTodosPendingPage = () => {
-  const [state, setState] = useState([
+  const [events, setEvents] = useState([
     {
       start: moment().toDate(),
       end: moment().add(1, "days").toDate(),
-      title: "Some title",
+      title: "Study React For Personal",
     },
   ]);
 
   const onEventResize = (data: { start: any; end: any }) => {
     const { start, end } = data;
 
-    const temp = state.map((item) => ({
+    const temp = events.map((item) => ({
       ...item,
       start,
       end,
     }));
 
-    setState(temp);
+    setEvents(temp);
   };
 
   const onEventDrop = (data: any) => {
@@ -39,7 +39,7 @@ const ListTodosPendingPage = () => {
         start,
         end,
       };
-      setState((prev) => [...prev, newEvent]);
+      setEvents((prev) => [...prev, newEvent]);
     }
   };
 
@@ -49,7 +49,7 @@ const ListTodosPendingPage = () => {
         defaultDate={moment().toDate()}
         defaultView={Views.MONTH}
         views={["month", "week", "day", "agenda"]}
-        events={state}
+        events={events}
         localizer={viLocalizer}
         culture="vi"
         onEventDrop={onEventDrop}
