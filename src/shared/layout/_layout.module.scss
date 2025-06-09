@@ -25,6 +25,20 @@
     .sidebar__main {
       margin-top: 50px;
       padding-left: 20px;
+
+      .sidebar-item {
+        display: flex;
+        flex-direction: row;
+        cursor: pointer;
+        color: #ffffff;
+        padding-right: 20px;
+        margin-top: 20px;
+        margin-bottom: 25px;
+
+        img {
+          margin-right: 15px;
+        }
+      }
     }
   }
 

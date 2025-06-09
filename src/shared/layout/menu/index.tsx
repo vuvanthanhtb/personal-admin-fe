@@ -1,20 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import styles from "./_menu.module.scss";
-import {
-  CheckCheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-  ListCheckIcon,
-} from "shared";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { CheckCheckIcon, ChevronDownIcon, ChevronUpIcon } from "shared";
+import styles from "./_menu.module.scss";
 
 interface MenuComponentProps {
   name: string;
+  icon: any;
   childs: any[];
 }
 
 const MenuComponent: React.FC<MenuComponentProps> = (props) => {
-  const { name, childs } = props;
+  const { name, icon, childs } = props;
   const navigate = useNavigate();
 
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -26,14 +22,20 @@ const MenuComponent: React.FC<MenuComponentProps> = (props) => {
         onClick={() => setOpen((prev) => !prev)}
       >
         <div>
-          <img src={ListCheckIcon} alt="list" /> {name}
+          <img src={icon} alt="list" /> {name}
         </div>
         <img src={isOpen ? ChevronUpIcon : ChevronDownIcon} alt="chevron" />
       </div>
       {isOpen && (
         <div className={styles["menu-child"]}>
           {childs.map((el, idx) => (
-            <div key={`menu-child-${idx}`} onClick={() => navigate(el.path)}>
+            <div
+              key={`menu-child-${idx}`}
+              onClick={() => navigate(el.path)}
+              className={
+                window.location.pathname === el.path ? "active-sidebar" : ""
+              }
+            >
               <img src={CheckCheckIcon} alt="menu" />
               {el.title}
             </div>

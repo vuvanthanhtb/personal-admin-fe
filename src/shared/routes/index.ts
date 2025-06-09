@@ -1,8 +1,10 @@
 import { lazy } from "react";
-import todoRoutes from "./todo.route";
 import authRoutes from "./auth.route";
 import type { IRouteModel } from "../model/route.model";
 import homeRoutes from "./home.route";
+import calendarRoutes from "./calendar.route";
+import permissionRoutes from "./permission.route";
+import userRoutes from "./user.route";
 
 const routes: IRouteModel[] = [
   {
@@ -13,8 +15,10 @@ const routes: IRouteModel[] = [
     component: lazy(() => import("shared/pages/not-found")),
   },
   ...homeRoutes,
-  ...todoRoutes,
   ...authRoutes,
+  ...calendarRoutes,
+  ...permissionRoutes,
+  ...userRoutes
 ];
 
 export default routes;
