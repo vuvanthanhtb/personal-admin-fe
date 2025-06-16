@@ -9,7 +9,13 @@ const sidebarConfig: any[] = [
     name: "Quản lý tài khoản",
     key: "USER",
     icon: ListCheckIcon,
-    childs: [...userRoutes, ...permissionRoutes],
+    childs: userRoutes,
+  },
+  {
+    name: "Quản lý phân quyền",
+    key: "PERMISSION",
+    icon: ListCheckIcon,
+    childs: permissionRoutes,
   },
 ];
 

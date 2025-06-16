@@ -18,12 +18,14 @@ const SidebarComponent: React.FC<SidebarComponentProps> = (props) => {
         {sidebarConfig.map((item, index) => {
           if (item?.childs.length > 0) {
             return (
-              <MenuComponent
-                key={`sidebar-${index}`}
-                name={item.name}
-                icon={item.icon}
-                childs={item.childs}
-              />
+              <div style={{marginTop: 5, marginBottom: 15}}>
+                <MenuComponent
+                  key={`sidebar-${index}`}
+                  name={item.name}
+                  icon={item.icon}
+                  childs={item.childs}
+                />
+              </div>
             );
           }
 
