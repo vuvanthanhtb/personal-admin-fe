@@ -4,8 +4,8 @@
   background: #8080801a;
 
   .sidebar {
-    width: 350px;
-    height: 100vh;
+    width: 300px;
+    min-height: 100vh;
     background: #001529;
     display: flex;
     flex-direction: column;
@@ -44,7 +44,7 @@
   }
 
   .layout-container__left {
-    width: calc(100vw - 350px);
+    width: calc(100vw - 300px);
 
     .header {
       height: 80px;

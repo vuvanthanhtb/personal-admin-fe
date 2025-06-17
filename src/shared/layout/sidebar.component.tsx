@@ -19,7 +19,7 @@ const SidebarComponent: React.FC<SidebarComponentProps> = (props) => {
           if (item?.childs.length > 0) {
             return (
               <div
-                style={{ marginTop: 5, marginBottom: 15 }}
+                style={{ marginTop: 5, marginBottom: 30 }}
                 key={`sidebar-${index}`}
               >
                 <MenuComponent
