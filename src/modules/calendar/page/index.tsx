@@ -1,48 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Calendar, Views } from "react-big-calendar";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
-import { viLocalizer, viMessages } from "shared";
 import moment from "moment";
+import { viLocalizer, viMessages } from "shared";
+import type { RootState } from "app/redux/store";
+import CreateNewEventComponent from "../components/create-new-event";
 
 import styles from "./_calendar.module.scss";
 
 const DnDCalendar = withDragAndDrop(Calendar);
 
 const CalendarPage = () => {
-  const [events, setEvents] = useState([
-    {
-      start: moment().toDate(),
-      end: moment().add(1, "days").toDate(),
-      title: "Study React For Personal",
-    },
-  ]);
+  const { events, isCreatedEvent } = useSelector(
+    (state: RootState) => state.calendar
+  );
 
-  const onEventResize = (data: { start: any; end: any }) => {
-    const { start, end } = data;
+  const [event, setEvent] = useState([]);
+  const [show, setShow] = useState<boolean>(false);
 
-    const temp = events.map((item) => ({
-      ...item,
-      start,
-      end,
-    }));
+  useEffect(() => {
+    if (isCreatedEvent) {
+      setShow(false);
+    }
+  }, [isCreatedEvent]);
 
-    setEvents(temp);
+  const onEventResize = (data: any) => {
+    console.log(11111, data);
   };
 
   const onEventDrop = (data: any) => {
     console.log(data);
   };
 
-  const handleSelectSlot = ({ start, end }: { start: Date; end: Date }) => {
-    const title = window.prompt("Nhập tiêu đề sự kiện:");
-    if (title) {
-      const newEvent = {
-        title,
-        start,
-        end,
-      };
-      setEvents((prev) => [...prev, newEvent]);
-    }
+  const handleSelectSlot = (dateRangeSelected: any) => {
+    setShow(true);
+    setEvent(dateRangeSelected);
   };
 
   return (
@@ -62,6 +55,7 @@ const CalendarPage = () => {
         selectable
         onSelectSlot={handleSelectSlot}
       />
+      <CreateNewEventComponent show={show} setShow={setShow} event={event} />
     </div>
   );
 };

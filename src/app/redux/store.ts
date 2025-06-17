@@ -14,10 +14,12 @@ import storage from "redux-persist/lib/storage";
 import { loadingMiddleware } from "./middleware";
 import loadingReducer from "./loading.slice";
 import authReducer from "modules/auth/business/slice.auth";
+import calendarReducer from "modules/calendar/business/slice.calendar";
 
 const rootReducer = combineReducers({
   app: loadingReducer,
   auth: authReducer,
+  calendar: calendarReducer,
 });
 
 const persistConfig = {

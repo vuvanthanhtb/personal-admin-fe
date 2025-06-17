@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CheckCheckIcon, ChevronDownIcon, ChevronUpIcon } from "shared";
+import { ChevronsRightIcon, ChevronDownIcon, ChevronUpIcon } from "shared";
 import styles from "./_menu.module.scss";
 
 interface MenuComponentProps {
@@ -36,7 +36,7 @@ const MenuComponent: React.FC<MenuComponentProps> = (props) => {
                 window.location.pathname === el.path ? "active-sidebar" : ""
               }
             >
-              <img src={CheckCheckIcon} alt="menu" />
+              <img src={ChevronsRightIcon} alt="menu" />
               {el.title}
             </div>
           ))}
