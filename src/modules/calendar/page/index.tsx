@@ -16,7 +16,7 @@ const CalendarPage = () => {
     (state: RootState) => state.calendar
   );
 
-  const [event, setEvent] = useState([]);
+  const [event, setEvent] = useState(null);
   const [show, setShow] = useState<boolean>(false);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const CalendarPage = () => {
       <DnDCalendar
         defaultDate={moment().toDate()}
         defaultView={Views.MONTH}
-        views={["month", "week", "day", "agenda"]}
+        views={["month", "week", "day"]}
         events={events}
         localizer={viLocalizer}
         culture="vi"
