@@ -7,7 +7,7 @@ export const PATCH = "patch";
 export const TOKEN_CURRENT = "token_current";
 export const REFRESH_TOKEN = "refresh_token";
 
-export const STRING = "stting";
+export const STRING = "string";
 export const NUMBER = "number";
 export const TEXT = "text";
 export const ARRAY = "array";
@@ -28,3 +28,8 @@ export const URL = "url";
 export const BUTTON = "button";
 
 export const ROOT = "root";
+
+export const PAGE_CURRENT = 1;
+export const PAGE_SIZE = 10;
+export const TOTAL_PAGE = 0;
+export const TOTAL_RECORD = 0;

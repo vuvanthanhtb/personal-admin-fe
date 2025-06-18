@@ -1,14 +1,10 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Form, Row, Col } from "react-bootstrap";
+import clsx from "clsx";
 import { TEXT, PASSWORD, BUTTON } from "shared/constants";
+import type { IButton } from "shared/model/button.model";
 import styles from "./_form.module.scss";
-
-type IButton = {
-  type: "button" | "submit" | "reset";
-  label: string;
-  disabled?: boolean;
-};
 
 type IField = {
   name?: string;
@@ -103,7 +99,8 @@ export const FormComponent: React.FC<FormComponentProps> = (props) => {
                   key={`form-${index + 9999}`}
                   md={field.size}
                   xs={12}
-                  className="mb-3"
+                  className={clsx("mb-3", styles["form-btn-container"])}
+                  style={field?.style || {}}
                 >
                   {field.childs.map((child: IButton, childIndex: number) => (
                     <Button
@@ -111,6 +108,7 @@ export const FormComponent: React.FC<FormComponentProps> = (props) => {
                       type={child.type}
                       disabled={child.disabled}
                       className="me-2"
+                      style={child?.style || {}}
                     >
                       {child.label}
                     </Button>

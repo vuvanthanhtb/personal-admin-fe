@@ -1,0 +1,29 @@
+.user-info-container {
+  .btn-group {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 80px;
+    background: #80808038;
+    z-index: 99999;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    button {
+      margin-top: 20px;
+    }
+  }
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+
+  div:nth-child(1) {
+    width: 150px;
+  }
+}

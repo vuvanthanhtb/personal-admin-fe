@@ -1,11 +1,14 @@
 export * from "./utils/func.helper";
 export * from "./utils/toast.helper";
 export * from "./constants";
+export * from "./model/button.model";
+export * from "./model/table.model";
+export * from "./model/route.model";
 export * from "./components/form";
-export { default as ModalComponent } from "./components/modal";
+export * from "./components/table";
 export * from "./viLocalizer";
+export { default as ModalComponent } from "./components/modal";
 export { default as PrivateLayout } from "./layout/private.layout";
-export { default as DataTable } from "./components/table";
 export { default as FullPageLoading } from "./pages/full-page-loading";
 export { default as NotFoundPage } from "./pages/not-found";
 export { default as routes } from "./routes";

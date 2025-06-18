@@ -15,11 +15,19 @@ import { loadingMiddleware } from "./middleware";
 import loadingReducer from "./loading.slice";
 import authReducer from "modules/auth/business/slice.auth";
 import calendarReducer from "modules/calendar/business/slice.calendar";
+import apiReducer from "modules/api/business/slice.api";
+import roleReducer from "modules/role/business/slice.role";
+import permissionReducer from "modules/permission/business/slice.permission";
+import userReducer from "modules/user/business/slice.user";
 
 const rootReducer = combineReducers({
   app: loadingReducer,
   auth: authReducer,
   calendar: calendarReducer,
+  api: apiReducer,
+  role: roleReducer,
+  permission: permissionReducer,
+  user: userReducer,
 });
 
 const persistConfig = {
