@@ -8,6 +8,7 @@ import axios, {
 } from "axios";
 import { saveAs } from "file-saver";
 import {
+  clearAllSession,
   getSession,
   REFRESH_TOKEN,
   removeSession,
@@ -76,6 +77,7 @@ export class AxiosStrategy implements IRequestStrategy {
         if (error.response?.status === 403) {
           removeSession(TOKEN_CURRENT);
           removeSession(REFRESH_TOKEN);
+          clearAllSession();
           window.location.href = "/login";
         }
 
@@ -111,6 +113,7 @@ export class AxiosStrategy implements IRequestStrategy {
           } catch (err) {
             removeSession(TOKEN_CURRENT);
             removeSession(REFRESH_TOKEN);
+            clearAllSession();
             window.location.href = "/login";
             return Promise.reject(err);
           } finally {

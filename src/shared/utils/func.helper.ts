@@ -40,3 +40,11 @@ export const removeSession = (key: string): void => {
     console.error(`Lỗi khi xóa session với key "${key}":`, error);
   }
 };
+
+export const clearAllSession = (): void => {
+  try {
+    localStorage.clear();
+  } catch (error) {
+    console.error("Lỗi khi xóa toàn bộ session:", error);
+  }
+};

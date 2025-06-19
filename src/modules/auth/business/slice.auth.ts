@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { REFRESH_TOKEN, TOKEN_CURRENT } from "shared/constants";
 import AuthService from "./service.auth";
 import type { LoginRequest } from "./model.auth";
-import { setSession } from "shared";
+import { clearAllSession, setSession } from "shared";
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
@@ -23,6 +23,15 @@ export const getCurrentUser = createAsyncThunk(
     const data = await AuthService.getCurrentUser();
 
     return data;
+  }
+);
+
+export const logoutUser = createAsyncThunk(
+  "auth/logoutUser",
+  async () => {
+    // TODO:
+    clearAllSession();
+    window.location.href = "/login";
   }
 );
 

@@ -22,3 +22,4 @@ export { default as CheckCheckIcon } from "./assets/check-check.svg";
 export { default as PencilLineIcon } from "./assets/pencil-line.svg";
 export { default as MoveRightIcon } from "./assets/move-right.svg";
 export { default as ChevronsRightIcon } from "./assets/chevrons-right.svg";
+export { default as LogoutIcon } from "./assets/log-out.svg";

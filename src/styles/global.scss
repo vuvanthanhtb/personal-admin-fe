@@ -36,3 +36,15 @@ button {
 .offcanvas.offcanvas-end.show {
   width: 70vw;
 }
+
+.logout {
+  border: none;
+  background: transparent;
+  padding-left: 20px;
+  cursor: pointer;
+
+  img {
+    height: 24px;
+    width: 24px;
+  }
+}
