@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { DATA_TABLE_DEFAULT } from "shared";
-import type { SearchUsersRequest } from "./model.user";
+import type {
+  SearchUsersRequest,
+  CreateOrUpdateUserRequest,
+} from "./model.user";
 
 export const getUsersList = createAsyncThunk(
   "user/getUsersList",
@@ -12,6 +15,7 @@ export const getUsersList = createAsyncThunk(
         {
           fullName: "Vũ Văn Thanh",
           username: "thanhvv",
+          email: "test@mail.com",
           role: "ADMIN",
           createdAt: "06-06-2025",
           status: "ACTIVATE",
@@ -19,6 +23,7 @@ export const getUsersList = createAsyncThunk(
         {
           fullName: "Vũ Văn Thanh",
           username: "thanhvv1",
+          email: "test@mail.com",
           role: "CALENDAR",
           createdAt: "06-06-2025",
           status: "DEACTIVATE",
@@ -27,8 +32,26 @@ export const getUsersList = createAsyncThunk(
       pageCurrent: 1,
       pageSize: 10,
       totalPage: 1,
-      totalRecord: 10,
+      totalRecord: 2,
     };
+  }
+);
+
+export const createUser = createAsyncThunk(
+  "user/createUser",
+  async (payload: CreateOrUpdateUserRequest) => {
+    console.log(payload);
+
+    return true;
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async (payload: CreateOrUpdateUserRequest) => {
+    console.log(payload);
+
+    return true;
   }
 );
 
@@ -36,10 +59,14 @@ const initialState = {
   list: DATA_TABLE_DEFAULT,
 };
 
-const user = createSlice({
+const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    resetData: (state) => {
+      state.list = DATA_TABLE_DEFAULT;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getUsersList.fulfilled, (state, action) => {
       state.list = action.payload;
@@ -47,4 +74,5 @@ const user = createSlice({
   },
 });
 
-export default user.reducer;
+export const { resetData } = userSlice.actions;
+export default userSlice.reducer;

@@ -36,6 +36,7 @@ export const loginConfig: IConfig = {
         {
           label: "Đăng nhập",
           type: "submit",
+          action: "submit",
         },
       ],
     },

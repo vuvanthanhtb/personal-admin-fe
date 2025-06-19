@@ -2,17 +2,23 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { DataTable, FormComponent } from "shared";
 import type { AppDispatch } from "app/redux/store";
-import { initialValues, searchConfig, tableConfig } from "./config";
+import { CreateUserComponent, UpdateUserComponent } from "../components";
+import {
+  btnGroup,
+  initialValues,
+  searchConfig,
+  tableConfig,
+} from "./config.user-page";
 import type { SearchUsersRequest } from "../business/model.user";
 import { getUsersList } from "../business/slice.user";
-import UserInfoComponent from "../components/user-info";
 import styles from "./_users.module.scss";
 
 const UserPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [formValues, setFormValues] =
     useState<SearchUsersRequest>(initialValues);
-  const [show, setShow] = useState<boolean>(false);
+  const [isUpdate, setUpdate] = useState<boolean>(false);
+  const [isCreate, setCreate] = useState<boolean>(false);
   const [rowSelected, setRowSelected] = useState(null);
 
   const onChange = (data: Record<string, any>) => {
@@ -27,13 +33,23 @@ const UserPage = () => {
   };
 
   const handleCellAction = (row: any) => {
-    setShow(true);
+    setUpdate(true);
     setRowSelected(row);
+  };
+
+  const handleCreate = () => {
+    setCreate(true);
   };
 
   return (
     <div className={styles["user-page-container"]}>
       <FormComponent
+        options={{
+          roleOption: [
+            { label: "ADMIN", value: "ADMIN" },
+            { label: "USER", value: "USER" },
+          ],
+        }}
         formConfig={searchConfig}
         values={formValues}
         onChange={onChange}
@@ -42,16 +58,27 @@ const UserPage = () => {
       <div className={styles["user-page-space"]} />
       <DataTable
         tableConfig={tableConfig}
+        btnGroup={btnGroup}
         reducer="user"
         state="list"
         handleCellAction={handleCellAction}
+        handlers={{
+          handleCreate,
+        }}
       />
-      {show && (
-        <UserInfoComponent
+      {isUpdate && (
+        <UpdateUserComponent
           placement="end"
-          show={show}
-          setShow={setShow}
+          show={isUpdate}
+          setShow={setUpdate}
           data={rowSelected}
+        />
+      )}
+      {isCreate && (
+        <CreateUserComponent
+          placement="end"
+          show={isCreate}
+          setShow={setCreate}
         />
       )}
     </div>

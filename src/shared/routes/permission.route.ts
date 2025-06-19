@@ -10,7 +10,7 @@ const permissionRoutes: IRouteModel[] = [
     path: "/list-role",
     private: true,
     roles: [ROOT],
-    component: lazy(() => import("modules/permission/page")),
+    component: lazy(() => import("modules/role/page")),
     childs: [],
   },
   {
@@ -30,7 +30,7 @@ const permissionRoutes: IRouteModel[] = [
     path: "/list-api",
     private: true,
     roles: [ROOT],
-    component: lazy(() => import("modules/permission/page")),
+    component: lazy(() => import("modules/api/page")),
     childs: [],
   },
 ];

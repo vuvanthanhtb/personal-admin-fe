@@ -1,14 +1,41 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import type {
+  CreateOrUpdateRoleRequest,
+  SearchRolesRequest,
+} from "./model.role";
 
-export const getRolesList = createAsyncThunk("role/getRolesList", async () => {
-  return [];
-});
+export const getRolesList = createAsyncThunk(
+  "role/getRolesList",
+  async (payload: SearchRolesRequest) => {
+    console.log(payload);
+
+    return [];
+  }
+);
+
+export const createRole = createAsyncThunk(
+  "role/createRole",
+  async (payload: CreateOrUpdateRoleRequest) => {
+    console.log(payload);
+
+    return true;
+  }
+);
+
+export const updateRole = createAsyncThunk(
+  "role/updateRole",
+  async (payload: CreateOrUpdateRoleRequest) => {
+    console.log(payload);
+
+    return true;
+  }
+);
 
 const initialState = {
   list: [],
 };
 
-const role = createSlice({
+const roleSlice = createSlice({
   name: "role",
   initialState,
   reducers: {},
@@ -19,4 +46,4 @@ const role = createSlice({
   },
 });
 
-export default role.reducer;
+export default roleSlice.reducer;

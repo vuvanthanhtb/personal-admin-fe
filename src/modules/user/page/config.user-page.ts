@@ -1,4 +1,12 @@
-import { BUTTON, STRING, TEXT, type IConfig, type TableColumn } from "shared";
+import {
+  BUTTON,
+  SELECT,
+  STRING,
+  TEXT,
+  type IButton,
+  type IConfig,
+  type TableColumn,
+} from "shared";
 
 export const tableConfig: TableColumn[] = [
   {
@@ -9,6 +17,11 @@ export const tableConfig: TableColumn[] = [
   {
     label: "Tài khoản",
     name: "username",
+    type: STRING,
+  },
+  {
+    label: "Email",
+    name: "email",
     type: STRING,
   },
   {
@@ -40,6 +53,7 @@ export const tableConfig: TableColumn[] = [
       {
         type: "button",
         label: "Cập nhật",
+        action: "submit",
         style: {
           background: "#ffa50099",
           border: "none",
@@ -51,21 +65,33 @@ export const tableConfig: TableColumn[] = [
   },
 ];
 
+export const btnGroup: IButton[] = [
+  {
+    label: "Tạo mới",
+    action: "handleCreate",
+    type: "button",
+  },
+];
+
 export const searchConfig: IConfig = {
   fields: [
     {
       type: TEXT,
       name: "username",
       label: "Tài khoản",
+      placeholder: "Nhập",
       required: false,
       size: 4,
       validation: {},
     },
     {
-      type: TEXT,
+      type: SELECT,
       name: "role",
       label: "Role",
+      placeholder: "Chọn",
+      option: "roleOption",
       required: false,
+      isMulti: true,
       size: 4,
       validation: {},
     },
@@ -76,6 +102,7 @@ export const searchConfig: IConfig = {
         {
           label: "Tìm kiếm",
           type: "submit",
+          action: "submit",
         },
       ],
     },
@@ -84,5 +111,5 @@ export const searchConfig: IConfig = {
 
 export const initialValues = {
   username: "",
-  role: "",
+  role: null,
 };

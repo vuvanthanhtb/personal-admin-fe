@@ -4,6 +4,7 @@ export * from "./constants";
 export * from "./model/button.model";
 export * from "./model/table.model";
 export * from "./model/route.model";
+export * from "./model/form.model";
 export * from "./components/form";
 export * from "./components/table";
 export * from "./viLocalizer";

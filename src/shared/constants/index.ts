@@ -33,3 +33,6 @@ export const PAGE_CURRENT = 1;
 export const PAGE_SIZE = 10;
 export const TOTAL_PAGE = 0;
 export const TOTAL_RECORD = 0;
+
+export const SELECT_OPTION_DEFAULT = { label: "Tất cả", value: null };
+export const USER_STATUS_DEFAULT = { label: "DEACTIVATE", value: "DEACTIVATE" };

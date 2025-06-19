@@ -3,5 +3,6 @@ export type IButton = {
   label: string;
   key?: string;
   disabled?: boolean;
+  action: string;
   style?: React.CSSProperties;
 };
