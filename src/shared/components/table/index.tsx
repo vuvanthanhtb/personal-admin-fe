@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import { Button, Table } from "react-bootstrap";
 import { BUTTON, STRING } from "shared/constants";
