@@ -19,6 +19,11 @@ export const tableConfig: TableColumn[] = [
     type: STRING,
   },
   {
+    label: "Mô tả",
+    name: "description",
+    type: STRING,
+  },
+  {
     label: "Hành động",
     name: "ROLE_ACTION",
     type: BUTTON,
