@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import type { AppDispatch, RootState } from "app/redux/store";
 import SidebarComponent from "./sidebar.component";
-import HeaderComponent from "./header.componnent";
+import HeaderComponent from "./header.component";
 import { getCurrentUser } from "modules/auth/business";
 import styles from "./_layout.module.scss";
 
 type IProps = {
   children: React.ReactNode;
-  title?: string;
+  title: string;
 };
 
 const PrivateLayout = (props: IProps) => {
-  const { children, title } = props;
+  const { children, title = "Personal Admin"} = props;
   const dispatch = useDispatch<AppDispatch>();
   const { isLogin } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
@@ -24,10 +24,10 @@ const PrivateLayout = (props: IProps) => {
     } else {
       dispatch(getCurrentUser())
     }
-  }, [isLogin]);
+  }, [dispatch, isLogin, navigate]);
 
   useEffect(() => {
-    document.title = title || "Personnal Admin";
+    document.title = title;
   }, [title]);
 
   return (
