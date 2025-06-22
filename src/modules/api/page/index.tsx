@@ -12,9 +12,9 @@ const ApiPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [formValues, setFormValues] = useState<SearchApiRequest>(initialValues);
   const [isUpdate, setUpdate] = useState<boolean>(false);
-  const [rowSelected, setRowSelected] = useState(null);
+  const [rowSelected, setRowSelected] = useState<unknown | null>(null);
 
-  const onChange = (data: Record<string, any>) => {
+  const onChange = (data: Record<string, unknown>) => {
     setFormValues((prevValues) => ({
       ...prevValues,
       ...data,
@@ -25,7 +25,7 @@ const ApiPage = () => {
     dispatch(getApiList(data));
   };
 
-  const handleCellAction = (row: any) => {
+  const handleCellAction = (row: unknown) => {
     setUpdate(true);
     setRowSelected(row);
   };
@@ -34,7 +34,7 @@ const ApiPage = () => {
     <div className={styles["api-page-container"]}>
       <FormComponent
         options={{
-          enndpointOption: [],
+          endpointOption: [],
         }}
         formConfig={searchConfig}
         values={formValues}

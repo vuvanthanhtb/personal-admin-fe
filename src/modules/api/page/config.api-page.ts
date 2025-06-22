@@ -9,12 +9,17 @@ import {
 export const tableConfig: TableColumn[] = [
   {
     label: "Endpoint",
-    name: "enndpoint",
+    name: "endpoint",
     type: STRING,
   },
   {
     label: "Role",
     name: "role",
+    type: STRING,
+  },
+    {
+    label: "Mô tả",
+    name: "description",
     type: STRING,
   },
   {
@@ -41,10 +46,10 @@ export const searchConfig: IConfig = {
   fields: [
     {
       type: SELECT,
-      name: "enndpoint",
-      label: "Enndpoint",
+      name: "endpoint",
+      label: "Endpoint",
       placeholder: "Chọn",
-      option: "enndpointOption",
+      option: "endpointOption",
       required: false,
       isMulti: true,
       size: 4,
