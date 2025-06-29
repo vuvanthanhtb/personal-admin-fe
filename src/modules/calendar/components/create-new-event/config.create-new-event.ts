@@ -23,6 +23,7 @@ export const eventConfig: IConfig = {
         {
           label: "Tạo mới",
           type: "submit",
+          action: "submit",
         },
       ],
     },

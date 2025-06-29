@@ -61,6 +61,11 @@ export const userConfig: IConfig = {
           label: "Đóng",
           type: "button",
           action: "handleClose",
+          style: {
+            border: "1px solid #0d6efd",
+            background: "transparent",
+            color: "#0d6efd",
+          },
         },
         {
           label: "Tạo mới",
