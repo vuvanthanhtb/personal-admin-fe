@@ -5,6 +5,7 @@ import homeRoutes from "./home.route";
 import calendarRoutes from "./calendar.route";
 import permissionRoutes from "./permission.route";
 import userRoutes from "./user.route";
+import aiRoutes from "./ai.route";
 
 const routes: IRouteModel[] = [
   {
@@ -18,7 +19,8 @@ const routes: IRouteModel[] = [
   ...authRoutes,
   ...calendarRoutes,
   ...permissionRoutes,
-  ...userRoutes
+  ...userRoutes,
+  ...aiRoutes
 ];
 
 export default routes;
