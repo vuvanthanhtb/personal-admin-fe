@@ -13,7 +13,9 @@ const SidebarComponent: React.FC<SidebarComponentProps> = (props) => {
 
   return (
     <div className={styles["sidebar"]}>
-      <div className={styles["sidebar__title"]}>Personal Admin</div>
+      <div className={styles["sidebar__title"]} onClick={() => navigate("/")}>
+        Personal Admin
+      </div>
       <div className={styles["sidebar__main"]}>
         {sidebarConfig.map((item, index) => {
           if (item?.childs.length > 0) {

@@ -1,13 +1,12 @@
-import { IllustrationIcon } from "shared";
+import React from "react";
 import styles from "./_home.module.scss";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <div className={styles["home-container"]}>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the main page of our application.</p>
-      <img src={IllustrationIcon} alt="Illustration" />
-      <p>Feel free to explore the features and functionalities.</p>
+      <div className={styles["cosmos-background"]}>
+        <div className={styles["stars-container"]}></div>
+      </div>
     </div>
   );
 };
